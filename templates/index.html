@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Cancer Detection System (SK, AK, and BCC)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Skin Cancer Detection System</h1>
+    </header>
+
+    <div class="container">
+        <section class="upload-form">
+            <h2>Upload a Dermoscopy Image</h2>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <label for="file">Choose an image:</label>
+                <input type="file" name="file" id="file" required>
+                <button type="submit">Upload</button>
+            </form>
+        </section>
+
+        {% if uploaded_image %}
+        <section class="image-display">
+            <div class="image-container">
+                <h3>Uploaded Image</h3>
+                <img src="{{ url_for('uploaded_file', filename=uploaded_image) }}" alt="Uploaded Image" width="300">
+            </div>
+            <div class="image-container">
+                <h3>Detected Image</h3>
+                <img src="{{ url_for('output_file', filename=output_image) }}" alt="Detected Image" width="300">
+            </div>
+        </section>
+        {% endif %}
+
+        <section class="app-description">
+            <h2>About the Application</h2>
+            <p>
+                This Flask-based web application is designed for skin cancer detection, focusing on identifying three skin conditions: 
+                <strong>Seborrheic Keratosis (SK)</strong>, <strong>Actinic Keratosis (AK)</strong>, and <strong>Basal Cell Carcinoma (BCC)</strong>.
+                The application utilizes a machine learning model trained exclusively on dermoscopy images to perform image classification. 
+                Users can upload dermoscopy images, and the system will process and classify the image into one of the three conditions. </p>
+
+        </section>
+    </div>
+    <div class="text-container">
+        <strong class="blink-text">model's knowledge is currently limited</strong>
+    </div>
+    
+
+    <footer>
+        <p>&copy; 2024 Skin Cancer Detection System | All rights reserved.</p>
+    </footer>
+</body>
+</html>
